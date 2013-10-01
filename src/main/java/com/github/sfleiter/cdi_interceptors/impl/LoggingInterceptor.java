@@ -63,8 +63,6 @@ public class LoggingInterceptor {
             }
         } catch (Exception e) {
             if (e instanceof RuntimeException) {
-                // TODO distinguish better here for ApplicationException f.e.
-                //      Maybe a strategy to get Level for an Exception?
                 level = annotation.exceptionLevel(); 
             }
             if (logger.isEnabled(level)) {

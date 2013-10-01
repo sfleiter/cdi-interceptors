@@ -7,7 +7,6 @@ public class StringTransformer {
     
     @SuppressWarnings("rawtypes")
     void transform(StringBuilder sb, Object o, int maximumCount) {
-        // TODO pretty print and limit Iterables, too
         Iterator iterator;
         int size = 0;
         if (o == null) {
@@ -19,8 +18,6 @@ public class StringTransformer {
             iterator = c.iterator();
             // fall through
         } else if (o.getClass().isArray()) {
-            // TODO support primitive arrays
-            // class.getComponentType?
             Object[] array = (Object[]) o;
             size = array.length;
             iterator = new ArrayIterator(array);
