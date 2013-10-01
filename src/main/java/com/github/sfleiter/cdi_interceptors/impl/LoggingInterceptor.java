@@ -28,7 +28,7 @@ import com.thoughtworks.paranamer.Paranamer;
 public class LoggingInterceptor {
 
     /** The paranamer used to get parameter names. */
-    Paranamer paranamer = new CachingParanamer(new BytecodeReadingParanamer());
+    private Paranamer paranamer = new CachingParanamer(new BytecodeReadingParanamer());
     
     @Inject
     private StringTransformer stringTransformer;
