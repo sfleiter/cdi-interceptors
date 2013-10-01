@@ -17,10 +17,10 @@ public class StringTransformer {
             size = c.size();
             iterator = c.iterator();
             // fall through
-        } else if (o.getClass().isArray()) {
+        } else if (o instanceof Object[]) {
             Object[] array = (Object[]) o;
             size = array.length;
-            iterator = new ArrayIterator(array);
+            iterator = new ArrayIterator<Object>(array);
             // fall through
         } else {
             // no array or collection
