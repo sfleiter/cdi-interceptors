@@ -2,9 +2,8 @@ package com.github.sfleiter.cdi_interceptors.impl;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.Iterator;
 
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -30,6 +29,9 @@ public class LoggingInterceptor {
 
     /** The paranamer used to get parameter names. */
     Paranamer paranamer = new CachingParanamer(new BytecodeReadingParanamer());
+    
+    @Inject
+    private StringTransformer stringTransformer;
 
     /**
      * Logging method invoke.
@@ -55,7 +57,7 @@ public class LoggingInterceptor {
                 duration = currentTimeMillis(measureDuration) - start;
                 sb = getCallString(ctx, maximumCount);
                 sb.append(" returns ");
-                prettyPrint(sb, result, maximumCount);
+                stringTransformer.transform(sb, result, maximumCount);
                 appendDuration(sb, measureDuration, duration);
                 logger.log(level, sb.toString());
             }
@@ -117,7 +119,7 @@ public class LoggingInterceptor {
             }
             sb.append("=");
             if (parameters[i] != null) {
-                prettyPrint(sb, parameters[i], maximumCount);
+                stringTransformer.transform(sb, parameters[i], maximumCount);
             }
             if (i < parameterNames.length - 1)
                 sb.append(", ");
@@ -132,49 +134,6 @@ public class LoggingInterceptor {
             sb.append(duration);
             sb.append("ms]");
         }
-    }
-
-    @SuppressWarnings("rawtypes")
-    private void prettyPrint(StringBuilder sb, Object o, int maximumCount) {
-        // TODO pretty print and limit Iterables, too
-        Iterator iterator;
-        int size = 0;
-        if (o == null) {
-            sb.append("null");
-            return;
-        } else if (o instanceof Collection) {
-            Collection c = (Collection) o;
-            size = c.size();
-            iterator = c.iterator();
-            // fall through
-        } else if (o.getClass().isArray()) {
-            // TODO support primitive arrays
-            // class.getComponentType?
-            Object[] array = (Object[]) o;
-            size = array.length;
-            iterator = new ArrayIterator(array);
-            // fall through
-        } else {
-            // no array or collection
-            sb.append(o.toString());
-            return;
-        }
-        
-        // array or collection
-        sb.append("Collection[size=").append(size).append(", ");
-        int i = 1;
-        while (i < maximumCount && iterator.hasNext()) {
-            Object elem = iterator.next();
-            sb.append(toString(elem));
-            if (iterator.hasNext()) {
-                sb.append(", ");
-            }
-        }
-        sb.append("]");
-    }
-
-    private String toString(Object object) {
-        return object != null ? object.toString() : "null";
     }
 
 }
