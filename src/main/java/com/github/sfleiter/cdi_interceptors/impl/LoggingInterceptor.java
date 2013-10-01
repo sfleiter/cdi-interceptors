@@ -79,7 +79,7 @@ public class LoggingInterceptor {
     }
 
     private long currentTimeMillis(boolean measureDuration) {
-        return System.currentTimeMillis();
+        return measureDuration ? System.currentTimeMillis() : 0;
     }
 
     private <T extends Annotation> T getAnnotation(Method m, Class<T> clz) {
