@@ -30,19 +30,19 @@ public class StringTransformer {
         
         // array or collection
         sb.append("Collection[size=").append(size).append(", ");
-        int i = 1;
+        int i = 0;
         while (i < maximumCount && iterator.hasNext()) {
             Object elem = iterator.next();
-            sb.append(toString(elem));
+            transform(sb, elem, maximumCount);
+            i++;
             if (iterator.hasNext()) {
                 sb.append(", ");
+                if (i == maximumCount) {
+                    sb.append("...");
+                }
             }
         }
         sb.append("]");
-    }
-
-    private String toString(Object object) {
-        return object != null ? object.toString() : "null";
     }
 
 }
