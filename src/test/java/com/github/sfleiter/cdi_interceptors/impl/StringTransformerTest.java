@@ -57,6 +57,10 @@ public class StringTransformerTest {
                     "Collection[size=4, 1, a, null, ...]", 
                     3 },
 
+                { new IH[] { new IH(1), new IH(3), new IH(5) }, 
+                    "Collection[size=3, IH: 1, IH: 3, IH: 5]", 
+                    Integer.MAX_VALUE },
+                    
                 { new Object[] { 1, "a", new Object[] { "b", 2, new IH(6) }, new IH(5) }, 
                     "Collection[size=4, 1, a, Collection[size=3, b, 2, IH: 6], IH: 5]", 
                     Integer.MAX_VALUE },
