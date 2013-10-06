@@ -20,8 +20,11 @@ import com.thoughtworks.paranamer.Paranamer;
 /**
  * The Class LoggingInterceptor add a special kind of logging advice to classes / methods.
  * Calls with parameter names, results and exceptions are logged in a single line.
+ *
  * A {@link BytecodeReadingParanamer} is use to detect parameter names.
  * If paranamer does not deliver names, a default of arg0...n is used.
+ * 
+ * @see Logging
  */
 @Interceptor
 @Logging
@@ -43,8 +46,8 @@ public class LoggingInterceptor {
     public Object loggingMethodInvoke(InvocationContext ctx) throws Exception {
         Logger logger = LoggerFactory.getLogger(ctx.getTarget().getClass().getName());
         Logging annotation = getAnnotation(ctx.getMethod(), Logging.class);
-        Level level = annotation.level();
-        int maximumCount = annotation.maximumIterableLoggingCount();
+        Level level = annotation.standardLogLevel();
+        int maximumCount = annotation.logItemLimit();
         boolean measureDuration = annotation.measureDuration();
 
         StringBuilder sb;
@@ -63,7 +66,7 @@ public class LoggingInterceptor {
             }
         } catch (Exception e) {
             if (e instanceof RuntimeException) {
-                level = annotation.exceptionLevel(); 
+                level = annotation.severeExceptionLogLevel(); 
             }
             if (logger.isEnabled(level)) {
                 duration = currentTimeMillis(measureDuration) - start;
