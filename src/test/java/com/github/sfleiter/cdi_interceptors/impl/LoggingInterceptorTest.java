@@ -1,13 +1,12 @@
 package com.github.sfleiter.cdi_interceptors.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import javax.inject.Inject;
 
 import org.jglue.cdiunit.AdditionalClasses;
 import org.jglue.cdiunit.CdiRunner;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -49,12 +48,8 @@ public class LoggingInterceptorTest {
     
     @Test
     public void testDefaultStringPrimitiveArrayParam() throws Exception {
-        int[] objectParam = new int[] {1, 2, 3};
-        sut.run("foo", objectParam);
-        // right assert after github issuse #5 is fixed
-        // assertEquals("INFO call run(stringParam=foo, objectParam=Collection[size=3, 1, 2, 3]) returns Collection[size=3, 1, 2, 3]", LogbackTestAppender.getMessage());
-        assertEquals("INFO call run(stringParam=foo, objectParam=" + objectParam
-                + ") returns " + objectParam, LogbackTestAppender.getMessage());
+        sut.run("foo", new int[] {1, 2, 3});
+        assertEquals("INFO call run(stringParam=foo, objectParam=Collection[size=3, 1, 2, 3]) returns Collection[size=3, 1, 2, 3]", LogbackTestAppender.getMessage());
     }
     
 }
