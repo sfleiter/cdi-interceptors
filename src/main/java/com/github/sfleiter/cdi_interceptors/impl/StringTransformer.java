@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class StringTransformer {
     
     @SuppressWarnings("rawtypes")
-    void transform(StringBuilder sb, Object o, int maximumCount) {
+    public void transform(StringBuilder sb, Object o, int maximumCount) {
         Iterator iterator;
         int size = 0;
         if (o == null) {

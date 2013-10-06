@@ -1,4 +1,4 @@
-package com.github.sfleiter.cdi_interceptors.impl;
+package com.github.sfleiter.cdi_interceptors;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ import uk.org.lidalia.slf4jext.Level;
 import uk.org.lidalia.slf4jext.Logger;
 import uk.org.lidalia.slf4jext.LoggerFactory;
 
-import com.github.sfleiter.cdi_interceptors.api.Logging;
+import com.github.sfleiter.cdi_interceptors.impl.StringTransformer;
 import com.thoughtworks.paranamer.BytecodeReadingParanamer;
 import com.thoughtworks.paranamer.CachingParanamer;
 import com.thoughtworks.paranamer.Paranamer;

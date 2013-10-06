@@ -1,4 +1,4 @@
-package com.github.sfleiter.cdi_interceptors.api;
+package com.github.sfleiter.cdi_interceptors;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,6 +18,7 @@ import uk.org.lidalia.slf4jext.Level;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Logging {
+    
     @Nonbinding Level level() default Level.INFO;
     @Nonbinding Level exceptionLevel() default Level.ERROR;
     @Nonbinding int maximumIterableLoggingCount() default 5;

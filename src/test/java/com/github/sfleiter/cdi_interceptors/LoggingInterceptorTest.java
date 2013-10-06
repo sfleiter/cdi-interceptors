@@ -1,4 +1,4 @@
-package com.github.sfleiter.cdi_interceptors.impl;
+package com.github.sfleiter.cdi_interceptors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.github.sfleiter.cdi_interceptors.LoggingInterceptor;
 import com.github.sfleiter.cdi_interceptors.util.LogbackTestAppender;
 
 @RunWith(CdiRunner.class)

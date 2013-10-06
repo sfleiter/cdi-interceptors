@@ -1,6 +1,6 @@
-package com.github.sfleiter.cdi_interceptors.impl;
+package com.github.sfleiter.cdi_interceptors;
 
-import com.github.sfleiter.cdi_interceptors.api.Logging;
+import com.github.sfleiter.cdi_interceptors.Logging;
 
 @Logging(measureDuration=false)
 public class InterceptedDefault {
