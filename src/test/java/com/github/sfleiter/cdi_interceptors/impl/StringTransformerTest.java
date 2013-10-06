@@ -1,14 +1,10 @@
 package com.github.sfleiter.cdi_interceptors.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
-import java.util.TimeZone;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +13,12 @@ import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
 public class StringTransformerTest {
+    
+    static class IH {
+        private int i;
+        public IH(int i) { this.i = i; }
+        public String toString() { return "IH: " + i; }
+    }
 
     private StringTransformer stringTransformer;
     private StringBuilder sb;
@@ -32,13 +34,8 @@ public class StringTransformerTest {
     
     @Before
     public void setUp() {
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         stringTransformer = new StringTransformer();
         sb = new StringBuilder();
-    }
-    @After
-    public void tearDown() {
-        TimeZone.setDefault(null);
     }
     
     @Parameters
@@ -50,18 +47,18 @@ public class StringTransformerTest {
                 { 1 , "1", Integer.MAX_VALUE },
                 { -1 , "-1", Integer.MAX_VALUE },
                 
-                { new Date(0), "Thu Jan 01 00:00:00 GMT 1970", Integer.MAX_VALUE },
+                { new IH(5), "IH: 5", Integer.MAX_VALUE },
                 
                 { new Object[] { 1 }, "Collection[size=1, 1]", Integer.MAX_VALUE },
-                { new Object[] { 1, "a", null, new Date(0) }, 
-                    "Collection[size=4, 1, a, null, Thu Jan 01 00:00:00 GMT 1970]", 
+                { new Object[] { 1, "a", null, new IH(5) }, 
+                    "Collection[size=4, 1, a, null, IH: 5]", 
                     Integer.MAX_VALUE },
-                { new Object[] { 1, "a", null, new Date(0) }, 
+                { new Object[] { 1, "a", null, new IH(5) }, 
                     "Collection[size=4, 1, a, null, ...]", 
                     3 },
 
-                { new Object[] { 1, "a", new Object[] { "b", 2, new Date(1000) }, new Date(0) }, 
-                    "Collection[size=4, 1, a, Collection[size=3, b, 2, Thu Jan 01 00:00:01 GMT 1970], Thu Jan 01 00:00:00 GMT 1970]", 
+                { new Object[] { 1, "a", new Object[] { "b", 2, new IH(6) }, new IH(5) }, 
+                    "Collection[size=4, 1, a, Collection[size=3, b, 2, IH: 6], IH: 5]", 
                     Integer.MAX_VALUE },
 
         });
