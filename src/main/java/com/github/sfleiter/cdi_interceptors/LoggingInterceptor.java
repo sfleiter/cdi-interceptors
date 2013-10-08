@@ -13,9 +13,11 @@ import uk.org.lidalia.slf4jext.Logger;
 import uk.org.lidalia.slf4jext.LoggerFactory;
 
 import com.github.sfleiter.cdi_interceptors.impl.StringTransformer;
+import com.thoughtworks.paranamer.AdaptiveParanamer;
 import com.thoughtworks.paranamer.BytecodeReadingParanamer;
 import com.thoughtworks.paranamer.CachingParanamer;
 import com.thoughtworks.paranamer.Paranamer;
+import com.thoughtworks.paranamer.PositionalParanamer;
 
 /**
  * The Class LoggingInterceptor add a special kind of logging advice to classes / methods.
@@ -31,7 +33,11 @@ import com.thoughtworks.paranamer.Paranamer;
 public class LoggingInterceptor {
 
     /** The paranamer used to get parameter names. */
-    private Paranamer paranamer = new CachingParanamer(new BytecodeReadingParanamer());
+    private Paranamer paranamer = new CachingParanamer(
+	    new AdaptiveParanamer(
+		    new BytecodeReadingParanamer(), 
+		    new PositionalParanamer()
+	    ));
     
     @Inject
     private StringTransformer stringTransformer;
@@ -102,22 +108,14 @@ public class LoggingInterceptor {
     }
 
     private StringBuilder getCallString(InvocationContext ctx, int maximumCount) {
-        String method = ctx.getMethod().getName();
-        String[] parameterNames = paranamer.lookupParameterNames(ctx.getMethod(), false);
         StringBuilder sb = new StringBuilder();
         sb.append("call ");
-        sb.append(method);
+        sb.append(ctx.getMethod().getName());
         sb.append("(");
         Object[] parameters = ctx.getParameters();
+        String[] parameterNames = paranamer.lookupParameterNames(ctx.getMethod(), false);
         for (int i = 0; i < parameters.length; i++) {
-            // if paranamer has found a name, then use it
-            if (parameterNames != null && parameterNames.length > i) {
-                sb.append(parameterNames[i]);
-            } else {
-                // render a generic name
-                sb.append("arg");
-                sb.append(i);
-            }
+            sb.append(parameterNames[i]);
             sb.append("=");
             stringTransformer.transform(sb, parameters[i], maximumCount);
             if (i < parameterNames.length - 1) {
