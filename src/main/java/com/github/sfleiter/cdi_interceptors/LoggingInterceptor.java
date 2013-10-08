@@ -120,8 +120,9 @@ public class LoggingInterceptor {
             }
             sb.append("=");
             stringTransformer.transform(sb, parameters[i], maximumCount);
-            if (i < parameterNames.length - 1)
+            if (i < parameterNames.length - 1) {
                 sb.append(", ");
+            }
         }
         sb.append(")");
         return sb;
