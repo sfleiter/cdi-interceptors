@@ -7,6 +7,7 @@
     <artifactId>cdi-interceptors</artifactId>
     <version>0.1-SNAPSHOT</version>
     <url>https://github.com/sfleiter/cdi-interceptors</url>
+    <name>cdi-interceptors</name>
     <description>
         The goal of this project is to provide CDI interceptors that implement
         cross-cutting concerns. Interceptors should be usable in different 
@@ -25,7 +26,13 @@
         <url>https://github.com/sfleiter/cdi-interceptors/issues/</url>
     </issueManagement>
     <inceptionYear>2013</inceptionYear>
-    <name>cdi-interceptors</name>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
