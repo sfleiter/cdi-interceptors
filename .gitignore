@@ -1,7 +1,5 @@
 /.*
 !.gitignore
-# .classpath
-# .project
-# .settings
+*~
 *.log
 target/
