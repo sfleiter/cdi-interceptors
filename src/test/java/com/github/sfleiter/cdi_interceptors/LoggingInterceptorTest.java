@@ -42,6 +42,12 @@ public class LoggingInterceptorTest {
     }
     
     @Test
+    public void testDefaultNullNullParamNullResult() throws Exception {
+        sut.run(null, null);
+        assertEquals("INFO call run(stringParam=null, objectParam=null) returns null", LogbackTestAppender.getMessage());
+    }
+    
+    @Test
     public void testDefaultStringArrayParam() throws Exception {
         sut.run("foo", new Integer[] {1, 2, 3});
         assertEquals("INFO call run(stringParam=foo, objectParam=Collection[size=3, 1, 2, 3]) returns Collection[size=3, 1, 2, 3]", LogbackTestAppender.getMessage());

@@ -119,9 +119,7 @@ public class LoggingInterceptor {
                 sb.append(i);
             }
             sb.append("=");
-            if (parameters[i] != null) {
-                stringTransformer.transform(sb, parameters[i], maximumCount);
-            }
+            stringTransformer.transform(sb, parameters[i], maximumCount);
             if (i < parameterNames.length - 1)
                 sb.append(", ");
         }
