@@ -17,8 +17,8 @@
 
     <scm>
         <url>https://github.com/sfleiter/cdi-interceptors</url>
-        <connection>scm:git:git://github.com:sfleiter/cdi-interceptors.git</connection>
-        <developerConnection>scm:git:ssh://github.com:sfleiter/cdi-interceptors.git</developerConnection>
+        <connection>scm:git:git://github.com/sfleiter/cdi-interceptors.git</connection>
+        <developerConnection>scm:git:git@github.com:sfleiter/cdi-interceptors.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
@@ -293,7 +293,7 @@
         <site>
             <id>github</id>
             <name>maven-reports at github</name>
-            <url>${pom.scm.url}</url>
+            <url>${project.scm.developerConnection}</url>
         </site>
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
