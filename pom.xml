@@ -291,6 +291,7 @@
 
     <distributionManagement>
         <site>
+            <!-- publish: mvn clean verify site site:stage scm-publish:publish-scm -->
             <id>github</id>
             <name>maven-reports at github</name>
             <url>${project.scm.developerConnection}</url>
