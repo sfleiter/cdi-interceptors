@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Creates an <code>Iterator</code> from the supplied object that has to be any kind of array,
- * either <code>Object[]</code>, a custom class array or an array of a primitive type.
+ * Creates an <code>Iterator</code> from the supplied object that has to be any
+ * kind of array, either <code>Object[]</code>, a custom class array or an array
+ * of a primitive type.
  * 
  * @author Stefan Fleiter
  */
@@ -18,10 +19,13 @@ public final class ArrayIterator implements Iterator<Object> {
 
     /**
      * Constructor.
-     * @param array any kind of array
-     * @throws IllegalArgumentException if param is no array
+     * 
+     * @param array
+     *            any kind of array
+     * @throws IllegalArgumentException
+     *             if param is no array
      */
-    public ArrayIterator(Object array) {
+    public ArrayIterator(final Object array) throws IllegalArgumentException {
         this.array = array;
         length = Array.getLength(array);
     }
@@ -29,6 +33,7 @@ public final class ArrayIterator implements Iterator<Object> {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean hasNext() {
         return pos < length;
     }
@@ -36,6 +41,7 @@ public final class ArrayIterator implements Iterator<Object> {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object next() {
         if (pos == length) {
             throw new NoSuchElementException();
@@ -45,14 +51,17 @@ public final class ArrayIterator implements Iterator<Object> {
 
     /**
      * Not supported for this iterator.
+     * 
      * @throws UnsupportedOperationException
      */
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
 
     /**
      * Returns the full length of the underlying array.
+     * 
      * @return length of the array
      */
     public int getLength() {
