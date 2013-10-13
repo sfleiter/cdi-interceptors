@@ -87,10 +87,10 @@
 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</a>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</a>={<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/ElementType.html?is-external=true#METHOD" title="class or interface in java.lang.annotation">METHOD</a>,<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/ElementType.html?is-external=true#TYPE" title="class or interface in java.lang.annotation">TYPE</a>})
 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</a>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</a>=<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</a>)
 public @interface <span class="strong">Logging</span></pre>
-<div class="block">Activates automatic method-level logging for any annotated bean.
- For every call a single slf4j log message is generated with the logger set to the name of the class.
- The message contains the method name, the parameters, the result object, the call duration and
- the exception if one got thrown.</div>
+<div class="block">Activates automatic method-level logging for any annotated bean. For every
+ call a single slf4j log message is generated with the logger set to the name
+ of the class. The message contains the method name, the parameters, the
+ result object, the call duration and the exception if one got thrown.</div>
 <dl><dt><span class="strong">Author:</span></dt>
   <dd>Stefan Fleiter</dd></dl>
 </li>
@@ -132,8 +132,8 @@ public @interface <span class="strong">Logging</span></pre>
 <tr class="rowColor">
 <td class="colFirst"><code>uk.org.lidalia.slf4jext.Level</code></td>
 <td class="colLast"><code><strong><a href="../../../../com/github/sfleiter/cdi_interceptors/Logging.html#standardLogLevel()">standardLogLevel</a></strong></code>
-<div class="block">Log Level for successful calls (not throwing an Exception) and those that throw Exceptions 
- not configured as severe.</div>
+<div class="block">Log Level for successful calls (not throwing an Exception) and those that
+ throw Exceptions not configured as severe.</div>
 </td>
 </tr>
 </table>
@@ -158,9 +158,8 @@ public @interface <span class="strong">Logging</span></pre>
 <li class="blockList">
 <h4>standardLogLevel</h4>
 <pre>public abstract&nbsp;uk.org.lidalia.slf4jext.Level&nbsp;standardLogLevel</pre>
-<div class="block">Log Level for successful calls (not throwing an Exception) and those that throw Exceptions 
- not configured as severe.
- Defaults to .</div>
+<div class="block">Log Level for successful calls (not throwing an Exception) and those that
+ throw Exceptions not configured as severe. Defaults to .</div>
 <dl>
 <dt>Default:</dt>
 <dd>uk.org.lidalia.slf4jext.Level.INFO</dd>
@@ -190,8 +189,8 @@ public @interface <span class="strong">Logging</span></pre>
 <h4>logItemLimit</h4>
 <pre>public abstract&nbsp;int&nbsp;logItemLimit</pre>
 <div class="block">Maximum number of items in a single array or collection that are logged.
- For recursive items (collection as part of an array, f.e.) the number of items 
- logged for a parameter or the result can be greater than that.
+ For recursive items (collection as part of an array, f.e.) the number of
+ items logged for a parameter or the result can be greater than that.
  Defaults to <a href="../../../../com/github/sfleiter/cdi_interceptors/Logging.html#LOG_ITEM_LIMIT_DEFAULT"><code>LOG_ITEM_LIMIT_DEFAULT</code></a>.</div>
 <dl>
 <dt>Default:</dt>
