@@ -6,6 +6,7 @@
     <groupId>com.github.sfleiter</groupId>
     <artifactId>cdi-interceptors</artifactId>
     <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <url>https://github.com/sfleiter/cdi-interceptors</url>
     <name>cdi-interceptors</name>
     <description>
@@ -297,6 +298,7 @@
             <url>${project.scm.developerConnection}</url>
         </site>
         <snapshotRepository>
+            <!-- prepare release: mvn -B clean javadoc:jar source:jar repository:bundle-create -->
             <id>sonatype-nexus-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
