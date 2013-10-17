@@ -210,11 +210,13 @@
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr-plugin.version}</version>
             </plugin>
-            <!-- TODO get maven-changes-plugin to work
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>${maven-changes-plugin.version}</version>
+                <configuration>
+                    <onlyMilestoneIssues>false</onlyMilestoneIssues>
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -223,7 +225,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
