@@ -171,6 +171,7 @@
                         http://jira.codehaus.org/browse/MGPG-9
                         -->
                         <mavenExecutorId>forked-path</mavenExecutorId>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <goals>clean deploy</goals>
                     </configuration>
