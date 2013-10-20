@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.sfleiter.cdi-interceptors</groupId>
     <artifactId>cdi-interceptors</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
     <url>https://github.com/sfleiter/cdi-interceptors</url>
     <name>cdi-interceptors</name>
@@ -20,7 +19,7 @@
         <url>https://github.com/sfleiter/cdi-interceptors</url>
         <connection>scm:git:git://github.com/sfleiter/cdi-interceptors.git</connection>
         <developerConnection>scm:git:git@github.com:sfleiter/cdi-interceptors.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.1</tag>
     </scm>
     <issueManagement>
         <system>GitHub</system>
@@ -76,12 +75,12 @@
 
         <!-- non apache plugin versions and configurations, please sort alphabetically -->
         <maven-license-plugin.version>1.10.b1</maven-license-plugin.version>
-        <maven-license-plugin.header></maven-license-plugin.header>
+        <maven-license-plugin.header />
         <attach-qar-maven-plugin.version>1.2</attach-qar-maven-plugin.version>
         <buildnumber-maven-plugin.version>1.2</buildnumber-maven-plugin.version>
         <cobertura-maven-plugin.version>2.6</cobertura-maven-plugin.version>
         <findbugs-maven-plugin.version>2.5.2</findbugs-maven-plugin.version>
-        <findbugs-maven-plugin.excludeFilterFile></findbugs-maven-plugin.excludeFilterFile>
+        <findbugs-maven-plugin.excludeFilterFile />
         <github-site-plugin.version>0.8</github-site-plugin.version>
         <github.global.server>github</github.global.server>
         <jacoco-maven-plugin.version>0.6.3.201306030806</jacoco-maven-plugin.version>
