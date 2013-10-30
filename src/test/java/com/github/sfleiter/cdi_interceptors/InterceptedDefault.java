@@ -12,6 +12,10 @@ public class InterceptedDefault {
         return objectParam;
     }
 
+    public Object runAndThrow(Object objectParam, Throwable throwable) throws Throwable {
+        throw throwable;
+    }
+
     public Object run(String stringParam, Object objectParam) {
         return objectParam;
     }

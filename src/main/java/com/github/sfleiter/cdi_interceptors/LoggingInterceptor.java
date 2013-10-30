@@ -23,10 +23,10 @@ import com.thoughtworks.paranamer.PositionalParanamer;
  * The Class LoggingInterceptor add a special kind of logging advice to classes
  * / methods. Calls with parameter names, results and exceptions are logged in a
  * single line.
- * 
+ *
  * A {@link BytecodeReadingParanamer} is use to detect parameter names. If
  * paranamer does not deliver names, a default of arg0...n is used.
- * 
+ *
  * @see Logging
  */
 @Interceptor
@@ -45,7 +45,7 @@ public class LoggingInterceptor {
 
     /**
      * Logging method invoke.
-     * 
+     *
      * @param ctx
      *            the invocation context
      * @return the result object
@@ -82,10 +82,9 @@ public class LoggingInterceptor {
             if (logger.isEnabled(level)) {
                 duration = currentTimeMillis(measureDuration) - start;
                 sb = getCallString(ctx, maximumCount);
-                sb.append(" caused ");
-                sb.append(e.getMessage());
+                sb.append(" caused {}");
                 appendDuration(sb, measureDuration, duration);
-                logger.log(level, sb.toString(), e);
+                logger.log(level, sb.toString(), e, e);
             }
             throw e;
         }
@@ -96,7 +95,7 @@ public class LoggingInterceptor {
      * Searches an annotation at the specified method of class and if not found
      * there at the respective class. This method can be used to to query the
      * annotations parameters.
-     * 
+     *
      * @param method
      *            the method to search at
      * @param annotationClazz
@@ -127,7 +126,7 @@ public class LoggingInterceptor {
     /**
      * Creates a string representation of the method call including method name
      * and parameter representation.
-     * 
+     *
      * @param ctx
      *            the InvocationContext
      * @param maximumCount
@@ -157,7 +156,7 @@ public class LoggingInterceptor {
 
     /**
      * Returns current system time or 0 if measurement is deactivated.
-     * 
+     *
      * @param measureDuration
      *            true if duration measurement should be active
      * @return current time in millis or 0
@@ -168,7 +167,7 @@ public class LoggingInterceptor {
 
     /**
      * Appends the duration of the call.
-     * 
+     *
      * @param sb
      *            the StringBuilder to append to
      * @param measureDuration

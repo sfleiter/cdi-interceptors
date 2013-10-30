@@ -17,7 +17,7 @@
 
   <appender name="TEST" class="com.github.sfleiter.cdi_interceptors.util.LogbackTestAppender">
     <encoder>
-      <pattern>%level %msg</pattern>
+      <pattern>%level %msg%n</pattern>
     </encoder>
   </appender>
 
