@@ -44,6 +44,20 @@ public @interface Logging {
     Level severeExceptionLogLevel() default Level.ERROR;
 
     /**
+     * Exception classes that should trigger logging at non severe level. In
+     * doubt this configuration is overridden by severeLoggingFor.
+     */
+    @Nonbinding
+    Class<? extends Throwable>[] nonSevereLoggingFor() default { Exception.class };
+
+    /**
+     * Exception classes that should trigger logging at severe level. In doubt
+     * this configuration is overrides by nonSevereLoggingFor.
+     */
+    @Nonbinding
+    Class<? extends Throwable>[] severeLoggingFor() default { RuntimeException.class };
+
+    /**
      * Whether to log the StackTrace for those Exceptions logged at standard log
      * level. Defaults to true.
      */

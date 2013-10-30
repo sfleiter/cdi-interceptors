@@ -57,7 +57,7 @@ public class LoggingInterceptor {
         Logger logger = LoggerFactory.getLogger(ctx.getTarget().getClass()
                 .getName());
         Logging annotation = getAnnotation(ctx.getMethod(), Logging.class);
-        Level level = annotation.standardLogLevel();
+        Level level;
         int maximumCount = annotation.logItemLimit();
         boolean measureDuration = annotation.measureDuration();
 
@@ -67,6 +67,7 @@ public class LoggingInterceptor {
         Object result;
         try {
             result = ctx.proceed();
+            level = annotation.standardLogLevel();
             if (logger.isEnabled(level)) {
                 duration = currentTimeMillis(measureDuration) - start;
                 sb = getCallString(ctx, maximumCount);
@@ -76,10 +77,12 @@ public class LoggingInterceptor {
                 logger.log(level, sb.toString());
             }
         } catch (Exception e) {
+            boolean isSevere = isExceptionSevere(e, annotation);
             boolean logStackTrace = true;
-            if (e instanceof RuntimeException) {
+            if (isSevere) {
                 level = annotation.severeExceptionLogLevel();
             } else {
+                level = annotation.standardLogLevel();
                 if (!annotation.logStackTraceAtStandardLevel()) {
                     logStackTrace = false;
                 }
@@ -98,6 +101,35 @@ public class LoggingInterceptor {
             throw e;
         }
         return result;
+    }
+
+    /**
+     * Finds out whether an exception should be logged as severe. Default is
+     * severe, which can be overruled by nonSevereLoggingFor which can be
+     * overruled again by nonSevereLoggingFor.
+     *
+     * @param e
+     *            the exception to check
+     * @param annotation
+     *            the annotation to get the configuration from
+     * @return true, if logging should be done as severe
+     */
+    private boolean isExceptionSevere(Exception e, Logging annotation) {
+        boolean severe = true;
+        Class<? extends Exception> exceptionClass = e.getClass();
+        for (Class<? extends Throwable> clazz : annotation.nonSevereLoggingFor()) {
+            if (clazz.isAssignableFrom(exceptionClass)) {
+                severe = false;
+                break;
+            }
+        }
+        for (Class<? extends Throwable> clazz : annotation.severeLoggingFor()) {
+            if (clazz.isAssignableFrom(exceptionClass)) {
+                severe = true;
+                break;
+            }
+        }
+        return severe;
     }
 
     /**
