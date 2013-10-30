@@ -21,7 +21,9 @@
     </encoder>
   </appender>
 
-  <root level="info">
+  <logger name="com.github.sfleiter.cdi_interceptors" level="TRACE" />
+
+  <root level="INFO">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="TEST" />
   </root>

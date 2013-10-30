@@ -15,7 +15,7 @@ import uk.org.lidalia.slf4jext.Level;
  * call a single slf4j log message is generated with the logger set to the name
  * of the class. The message contains the method name, the parameters, the
  * result object, the call duration and the exception if one got thrown.
- * 
+ *
  * @author Stefan Fleiter
  */
 @InterceptorBinding
@@ -42,6 +42,13 @@ public @interface Logging {
      */
     @Nonbinding
     Level severeExceptionLogLevel() default Level.ERROR;
+
+    /**
+     * Whether to log the StackTrace for those Exceptions logged at standard log
+     * level. Defaults to true.
+     */
+    @Nonbinding
+    boolean logStackTraceAtStandardLevel() default true;
 
     /**
      * Maximum number of items in a single array or collection that are logged.

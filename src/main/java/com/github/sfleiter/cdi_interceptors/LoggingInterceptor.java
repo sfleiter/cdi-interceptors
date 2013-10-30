@@ -76,15 +76,24 @@ public class LoggingInterceptor {
                 logger.log(level, sb.toString());
             }
         } catch (Exception e) {
+            boolean logStackTrace = true;
             if (e instanceof RuntimeException) {
                 level = annotation.severeExceptionLogLevel();
+            } else {
+                if (!annotation.logStackTraceAtStandardLevel()) {
+                    logStackTrace = false;
+                }
             }
             if (logger.isEnabled(level)) {
                 duration = currentTimeMillis(measureDuration) - start;
                 sb = getCallString(ctx, maximumCount);
                 sb.append(" caused {}");
                 appendDuration(sb, measureDuration, duration);
-                logger.log(level, sb.toString(), e, e);
+                if (logStackTrace) {
+                    logger.log(level, sb.toString(), e, e);
+                } else {
+                    logger.log(level, sb.toString(), e.toString());
+                }
             }
             throw e;
         }
