@@ -1,4 +1,4 @@
-CDI Interceptos
+CDI Interceptors
 ================================
 
 The goal of this project is to provide CDI interceptors that implement cross-cutting concerns.
