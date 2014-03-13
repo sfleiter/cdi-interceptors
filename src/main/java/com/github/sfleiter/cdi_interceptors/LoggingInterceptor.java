@@ -56,7 +56,7 @@ public class LoggingInterceptor {
     public Object loggingMethodInvoke(final InvocationContext ctx) throws Exception {
         Logger logger = LoggerFactory.getLogger(ctx.getTarget().getClass()
                 .getName());
-        Logging annotation = getAnnotation(ctx.getMethod(), Logging.class);
+        Logging annotation = getAnnotation(ctx.getTarget(), ctx.getMethod(), Logging.class);
         Level level;
         int maximumCount = annotation.logItemLimit();
         boolean measureDuration = annotation.measureDuration();
@@ -134,9 +134,17 @@ public class LoggingInterceptor {
 
     /**
      * Searches an annotation at the specified method of class and if not found
-     * there at the respective class. This method can be used to to query the
+     * there in the hierarchy of the target object. This method can be used to to query the
      * annotations parameters.
      *
+     * This code depends on the fact that the class of the CDI proxy is a subclass of the original
+     * class which is true for Weld and maybe other CDI containers. It's a shame there is no portable way
+     * to get access to the original target object or its class.
+     * See <a href="https://community.jboss.org/thread/232084">Weld Proxies</a> discussion in JBoss Community and
+     * <a href="https://issues.apache.org/jira/browse/DELTASPIKE-517">DELTASPIKE-517</a>.
+     *
+     * @param target
+     *            the object the interceptor is called on
      * @param method
      *            the method to search at
      * @param annotationClazz
@@ -147,7 +155,7 @@ public class LoggingInterceptor {
      * @throws RuntimeException
      *             if annotation is not found
      */
-    private <T extends Annotation> T getAnnotation(final Method method, final Class<T> annotationClazz)
+    private <T extends Annotation> T getAnnotation(final Object target, final Method method, final Class<T> annotationClazz)
             throws RuntimeException {
         // first look at method-level annotations, since they take priority
         for (Annotation a : method.getAnnotations()) {
@@ -155,13 +163,17 @@ public class LoggingInterceptor {
                 return annotationClazz.cast(a);
             }
         }
-        for (Annotation a : method.getDeclaringClass().getAnnotations()) {
-            if (annotationClazz.isInstance(a)) {
-                return annotationClazz.cast(a);
+
+        for (Class<?> clazz = target.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+            for (Annotation a : clazz.getAnnotations()) {
+                if (annotationClazz.isInstance(a)) {
+                    return annotationClazz.cast(a);
+                }
             }
         }
+
         throw new RuntimeException("@" + annotationClazz.getName() + " not found on method " + method.getName()
-                + " or its class " + method.getClass().getName());
+                + " or its class " + target.getClass().getName());
     }
 
     /**

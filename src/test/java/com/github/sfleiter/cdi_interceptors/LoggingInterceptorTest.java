@@ -29,6 +29,9 @@ public class LoggingInterceptorTest {
     @Inject
     private InterceptedConfigured conf;
 
+    @Inject
+    private InterceptedAnnotatedExtendingingClass extendingAnnotated;
+
     @Test
     public void testDefaultNoParamsNullResult() throws Exception {
         def.run();
@@ -134,6 +137,12 @@ public class LoggingInterceptorTest {
                     LogbackTestAppender.getMessage().trim(),
                     is("DEBUG call runAndThrow(objectParam=foo, throwable=java.lang.Exception: e message) caused java.lang.Exception: e message"));
         }
+    }
+
+    @Test
+    public void testExtendingDefaultNoParamsNullResult() throws Exception {
+        extendingAnnotated.run();
+        assertEquals("INFO call run() returns null", LogbackTestAppender.getMessage().trim());
     }
 
 }
