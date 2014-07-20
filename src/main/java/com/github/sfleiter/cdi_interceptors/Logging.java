@@ -52,7 +52,7 @@ public @interface Logging {
 
     /**
      * Exception classes that should trigger logging at severe level. In doubt
-     * this configuration is overrides by nonSevereLoggingFor.
+     * this configuration overrides nonSevereLoggingFor.
      */
     @Nonbinding
     Class<? extends Throwable>[] severeLoggingFor() default { RuntimeException.class };

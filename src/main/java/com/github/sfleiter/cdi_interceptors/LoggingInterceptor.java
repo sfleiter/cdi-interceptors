@@ -106,7 +106,7 @@ public class LoggingInterceptor {
     /**
      * Finds out whether an exception should be logged as severe. Default is
      * severe, which can be overruled by nonSevereLoggingFor which can be
-     * overruled again by nonSevereLoggingFor.
+     * overruled again by severeLoggingFor.
      *
      * @param e
      *            the exception to check
