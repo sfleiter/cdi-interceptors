@@ -71,8 +71,10 @@ public class LoggingInterceptor {
             if (logger.isEnabled(level)) {
                 duration = currentTimeMillis(measureDuration) - start;
                 sb = getCallString(ctx, maximumCount);
-                sb.append(" returns ");
-                stringTransformer.transform(sb, result, maximumCount);
+                if( annotation.logReturnValue() ) {
+                    sb.append(" returns ");
+                    stringTransformer.transform(sb, result, maximumCount);
+                }
                 appendDuration(sb, measureDuration, duration);
                 logger.log(level, sb.toString());
             }
