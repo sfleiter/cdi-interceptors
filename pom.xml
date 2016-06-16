@@ -4,7 +4,7 @@
 
     <groupId>com.github.sfleiter.cdi-interceptors</groupId>
     <artifactId>cdi-interceptors</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
     <url>https://github.com/sfleiter/cdi-interceptors</url>
     <name>cdi-interceptors</name>

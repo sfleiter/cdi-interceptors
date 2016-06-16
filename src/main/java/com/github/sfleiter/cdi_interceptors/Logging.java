@@ -65,6 +65,13 @@ public @interface Logging {
     boolean logStackTraceAtStandardLevel() default true;
 
     /**
+     * Whether to log the ReturnValue. Defaults to true.
+     * @return
+     */
+    @Nonbinding
+    boolean logReturnValue() default true;
+
+    /**
      * Maximum number of items in a single array or collection that are logged.
      * For recursive items (collection as part of an array, f.e.) the number of
      * items logged for a parameter or the result can be greater than that.
